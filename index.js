@@ -8,7 +8,7 @@ const client = new Discord.Client();
 
 const topFlopCommand = "bot style topflop jutsu";
 
-const cronExpression = "00 3 * * *";
+const cronExpression = "00 10 * * *";
 
 client.on("ready", () => {
   console.log("I am ready!");
