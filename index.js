@@ -13,11 +13,11 @@ const { connect } = require("./mongo");
 
 const client = new Discord.Client();
 
-const topFlopCommand = "topflop";
-const showConfigCommand = "show";
-const deleteConfigCommand = "delete";
-
 const makeCommand = (cmd) => `bot style ${cmd} jutsu`;
+
+const topFlopCommand = makeCommand("topflop");
+const showConfigCommand = makeCommand("show");
+const deleteConfigCommand = makeCommand("delete");
 
 const cronExpression = "00 1 * * *";
 
@@ -66,7 +66,7 @@ client.on("message", async (message) => {
     return;
   }
 
-  if (message.content.includes(makeCommand(topFlopCommand))) {
+  if (message.content.includes(topFlopCommand)) {
     const guildId = message.guild.id;
 
     const content = message.content.replace(topFlopCommand, "").trim();
@@ -89,7 +89,7 @@ client.on("message", async (message) => {
     }
   }
 
-  if (message.content.includes(makeCommand(showConfigCommand))) {
+  if (message.content.includes(showConfigCommand)) {
     const guildId = message.guild.id;
 
     const config = await getServerConfigByGuildId(guildId);
@@ -103,7 +103,7 @@ client.on("message", async (message) => {
     message.channel.send(response);
   }
 
-  if (message.content.includes(makeCommand(deleteConfigCommand))) {
+  if (message.content.includes(deleteConfigCommand)) {
     const guildId = message.guild.id;
     console.log("HJERE");
 
