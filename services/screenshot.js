@@ -1,6 +1,6 @@
 const puppeteer = require("puppeteer");
 
-const takeAllianceScreenshot = async (guildId, id) => {
+const takeAllianceScreenshot = async (profileName, guildId, id) => {
   const browser = await puppeteer.launch({ args: ["--no-sandbox"] });
   const page = await browser.newPage();
   await page.goto(
@@ -9,7 +9,7 @@ const takeAllianceScreenshot = async (guildId, id) => {
     )}`
   );
 
-  const path = `${guildId}-topflop.png`;
+  const path = `${profileName}-${guildId}-topflop.png`;
 
   const image = await page.$("img");
 
