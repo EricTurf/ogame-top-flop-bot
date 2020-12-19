@@ -19,7 +19,7 @@ const topFlopCommand = makeCommand("topflop");
 const showConfigCommand = makeCommand("show");
 const deleteConfigCommand = makeCommand("delete");
 
-const cronExpression = "51 17 * * *";
+const cronExpression = "00 1 * * *";
 
 const BOT_USER_NAME = "ogame-top-flop-bot";
 
