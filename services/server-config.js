@@ -1,11 +1,16 @@
 const ServerConfigModel = require("../model/server-config");
 
-const setServerConfig = async (guildId, id, channels) => {
-  const existingServerConfig = await getServerConfigByGuildId(guildId);
+const setServerConfig = async (profileName, guildId, id, channels) => {
+  const existingServerConfig = await getServerConfigByProfileName(
+    `${profileName}-${guildId}`
+  );
 
   if (existingServerConfig === null) {
-    console.log(`No server config for guild ${guildId}. Creating a new one`);
+    console.log(
+      `No server config for profile ${profileName}. Creating a new one`
+    );
     const serverConfig = new ServerConfigModel({
+      profileName: `${profileName}-${guildId}`,
       guildId,
       topflopId: id,
       channels,
@@ -14,7 +19,7 @@ const setServerConfig = async (guildId, id, channels) => {
     return serverConfig.save();
   } else {
     console.log(
-      `Found server config for guild ${guildId}. Updating with new topflopId ${id}`
+      `Found server config for profile ${profileName} in server ${guildId}. Updating with new topflopId ${id}`
     );
 
     existingServerConfig.topflopId = id;
@@ -25,15 +30,15 @@ const setServerConfig = async (guildId, id, channels) => {
 
 const getServerConfigs = () => ServerConfigModel.find({});
 
-const getServerConfigByGuildId = (guildId) =>
-  ServerConfigModel.findOne({ guildId });
+const getServerConfigByProfileName = (profileName) =>
+  ServerConfigModel.findOne({ profileName });
 
-const deleteServerConfigByGuildId = (guildId) =>
-  ServerConfigModel.deleteOne({ guildId });
+const deleteServerConfigByProfileName = (profileName) =>
+  ServerConfigModel.deleteOne({ profileName });
 
 module.exports = {
   setServerConfig,
   getServerConfigs,
-  getServerConfigByGuildId,
-  deleteServerConfigByGuildId,
+  getServerConfigByProfileName,
+  deleteServerConfigByProfileName,
 };
