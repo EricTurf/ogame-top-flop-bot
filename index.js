@@ -54,11 +54,13 @@ client.on("ready", async () => {
         )}`
       );
 
-      serverChannels.each((ch) =>
+      serverChannels.each((ch) => {
         ch.send("Top/flop for the day", {
           files: [`./${path}`],
-        })
-      );
+        });
+
+        ch.send("Friendly reminder to buy your Import/Export today.");
+      });
     }
   });
 });
